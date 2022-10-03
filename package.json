@@ -2,6 +2,7 @@
   "name": "ts-website-boilerplate",
   "version": "1.0.0",
   "description": "Boilerplate code for setting up a Typescript website (front-end and backend). Main technologies:",
+  "source": "src/app/index.html",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server/index.js\" \"parcel -p $PARCEL_PORT ./src/app/index.html\"",
     "test": "echo \"Error: no test specified\" && exit 1",
