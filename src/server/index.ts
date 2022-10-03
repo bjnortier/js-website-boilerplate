@@ -6,16 +6,18 @@ import { transports, format, createLogger } from "winston"
 const app: Express = express()
 
 /**
- * Application configuration.
+ * Application configuration. Take the defensice approach to ensure all
+ * env vars are defined. This avoid costly errors when in production
+ * and a var has not been defined.
  */
-;["PORT"].forEach((key) => {
+;["PORT", "LOG_LEVEL"].forEach((key) => {
   if (process.env[key] === undefined) {
     console.error(`Environment variable ${key} is required`)
     process.exit(1)
   }
 })
-const PORT: string = process.env.PORT
-const LOG_LEVEL: string = process.env.LOG_LEVEL || "info"
+const PORT: string = process.env.PORT!
+const LOG_LEVEL: string = process.env.LOG_LEVEL!
 
 /**
  * Logging
@@ -35,25 +37,22 @@ const winstonOptions = {
 const logger = createLogger(winstonOptions)
 
 /**
- * Routes
+ * Routes. Each request is logged first. Errors are caught last.
  */
 app.use(express.json())
 
-app.get("/", (req: Request, res: Response) => {
-  res.json("Hello World")
-})
-
-// The INFO logger runs before routes to log the request before being handled.
 app.use((req, res, next) => {
   logger.info(`${req.method} ${req.url}`)
   next()
 })
 
-// ROUTES
+app.get("/api", (req: Request, res: Response) => {
+  res.json("Hello World")
+})
+
 app.use(express.static("public"))
 // app.use("/", createDefaultRouter())
 
-// The ERROR logger catches any errors in the routes.
 app.use((err: any, req: Request, _res: Response, next: NextFunction) => {
   logger.error(`${req.method} ${req.url} ${err.stack}`)
   next()
