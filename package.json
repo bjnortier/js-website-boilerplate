@@ -4,7 +4,8 @@
   "description": "Boilerplate code for setting up a Typescript website (front-end and backend). Main technologies:",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server/index.js\" \"parcel -p $PARCEL_PORT ./src/app/index.html\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx rimraf dist/ && npx tsc && parcel build "
   },
   "repository": {
     "type": "git",

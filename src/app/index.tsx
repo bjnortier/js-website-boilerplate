@@ -2,7 +2,6 @@ import { createRoot } from "react-dom/client"
 import {
   createBrowserRouter,
   RouterProvider,
-  useParams,
   useRouteError,
 } from "react-router-dom"
 
