@@ -4,7 +4,8 @@
     "outDir": "./dist",
     "preserveConstEnums": true,
     "esModuleInterop": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "noEmit": false // create-react-app = true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
