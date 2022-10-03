@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",
+      "preserveConstEnums": true,
+      "esModuleInterop": true,
+      "noUnusedLocals": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+}
