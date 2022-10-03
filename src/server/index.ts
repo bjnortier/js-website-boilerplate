@@ -1,7 +1,7 @@
 import express, { Express, NextFunction, Request, Response } from "express"
 import { transports, format, createLogger } from "winston"
-// import Router from "express-promise-router"
-// import "@types/express"
+import path from "path"
+import { fileURLToPath } from "url"
 
 const app: Express = express()
 
@@ -50,8 +50,16 @@ app.get("/api", (req: Request, res: Response) => {
   res.json("Hello World")
 })
 
-app.use(express.static("public"))
-// app.use("/", createDefaultRouter())
+app.use(express.static("dist/app"))
+app.get("*", function (req, res) {
+  const filePath = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "..",
+    "app",
+    "index.html"
+  )
+  res.sendFile(filePath)
+})
 
 app.use((err: any, req: Request, _res: Response, next: NextFunction) => {
   logger.error(`${req.method} ${req.url} ${err.stack}`)
