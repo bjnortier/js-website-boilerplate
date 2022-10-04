@@ -78,24 +78,39 @@ app.post("/api/add-contact", async (req: Request, res: Response) => {
       input
     )
   }
-  if (!validEMail(req.body.emailAddress)) {
+  const emailAddress = req.body.emailAddress
+  if (!validEMail(emailAddress)) {
     res.status(400).json("invalid email address")
   } else {
-    res.status(200).json("ok")
+    try {
+      await db.query(
+        `
+        INSERT INTO people (contact, created_at)
+        VALUES ($1, $2)
+        `,
+        // @ts-ignore not sure why...?
+        [emailAddress, new Date()]
+      )
+      res.status(200).json("ok")
+    } catch (e) {
+      res.status(500).json("something went wrong :/")
+    }
   }
 })
 
 // Frontend (in production)
-app.use(express.static("dist/app"))
-app.get("*", function (req, res) {
-  const filePath = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    "..",
-    "app",
-    "index.html"
-  )
-  res.sendFile(filePath)
-})
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("dist/app"))
+  app.get("*", function (req, res) {
+    const filePath = path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "..",
+      "app",
+      "index.html"
+    )
+    res.sendFile(filePath)
+  })
+}
 
 // Errors
 app.use((err: any, req: Request, _res: Response, next: NextFunction) => {
