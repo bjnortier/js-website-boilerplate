@@ -68,14 +68,18 @@ app.get("/api", (req: Request, res: Response) => {
   res.json("Hello World")
 })
 app.get("/api/people", async (req: Request, res: Response) => {
-  const result = await db.query(
-    `
-    SELECT *
-    FROM people
-    ORDER BY created_at DESC
-    `
-  )
-  res.json(result.rows)
+  try {
+    const result = await db.query(
+      `
+      SELECT *
+      FROM people
+      ORDER BY created_at DESC
+      `
+    )
+    res.json(result.rows)
+  } catch (e) {
+    res.status(500).json("something went wrong :/")
+  }
 })
 app.post("/api/add-contact", async (req: Request, res: Response) => {
   const validEMail = (input: string) => {
