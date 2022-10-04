@@ -4,9 +4,14 @@ import {
   RouterProvider,
   useRouteError,
 } from "react-router-dom"
+import ContactDetails from "./ContactDetails"
 
 const Home = () => {
-  return <>Home</>
+  return (
+    <div id="contents">
+      <ContactDetails />
+    </div>
+  )
 }
 
 const Foo = () => {
@@ -15,8 +20,6 @@ const Foo = () => {
 
 const ErrorPage = () => {
   const error: any = useRouteError()
-  console.error(error)
-
   return (
     <div id="error-page">
       <h1>Oops!</h1>

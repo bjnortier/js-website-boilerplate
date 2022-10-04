@@ -72,6 +72,18 @@ app.get("/api/people", async (req: Request, res: Response) => {
   )
   res.json(result.rows)
 })
+app.post("/api/add-contact", async (req: Request, res: Response) => {
+  const validEMail = (input: string) => {
+    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+      input
+    )
+  }
+  if (!validEMail(req.body.emailAddress)) {
+    res.status(400).json("invalid email address")
+  } else {
+    res.status(200).json("ok")
+  }
+})
 
 // Frontend (in production)
 app.use(express.static("dist/app"))
