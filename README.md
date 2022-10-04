@@ -91,6 +91,8 @@ This app is deployed on Heroku and deploys as-is with `git push heroku main`. Yo
 
 The app is deployed on Heroku at the moment (Oct 2022):
 
+![PREPT on Heroku](https://user-images.githubusercontent.com/57994/193849467-61fea1b3-f353-4bc1-ab72-8631375a58be.png)
+
 1. Web app: [https://prept-stack.herokuapp.com](https://prept-stack.herokuapp.com)
 1. API: [https://prept-stack.herokuapp.com/api/people](https://prept-stack.herokuapp.com/api/people)
 1. Working React-router link: [https://prept-stack.herokuapp.com/foo](https://prept-stack.herokuapp.com/foo)
