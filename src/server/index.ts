@@ -9,7 +9,7 @@ import pg from "pg"
  * env vars are defined. This avoid costly errors when in production
  * and a var has not been defined.
  */
-;["PORT", "LOG_LEVEL", "DATABASE_URL"].forEach((key) => {
+;["PORT", "LOG_LEVEL", "DATABASE_URL", "NODE_ENV"].forEach((key) => {
   if (process.env[key] === undefined) {
     console.error(`Environment variable ${key} is required`)
     process.exit(1)
@@ -19,7 +19,6 @@ const PORT: string = process.env.PORT!
 const LOG_LEVEL: string = process.env.LOG_LEVEL!
 const DATABASE_URL: string = process.env.DATABASE_URL!
 const NODE_ENV: string = process.env.NODE_ENV!
-console.log(NODE_ENV)
 
 /**
  * Logging

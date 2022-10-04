@@ -38,6 +38,7 @@ export default (): JSX.Element => {
         </div>
         <div className="buttonContainer">
           <button onClick={onSubmit}>Notify me</button>
+          {requestState === "in-progress" ? <div>Sending...</div> : null}
           {requestState === "success" ? <div>Done!</div> : null}
         </div>
       </div>
