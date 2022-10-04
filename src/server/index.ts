@@ -18,7 +18,8 @@ import pg from "pg"
 const PORT: string = process.env.PORT!
 const LOG_LEVEL: string = process.env.LOG_LEVEL!
 const DATABASE_URL: string = process.env.DATABASE_URL!
-console.log(DATABASE_URL)
+const NODE_ENV: string = process.env.NODE_ENV!
+console.log(NODE_ENV)
 
 /**
  * Logging
@@ -43,11 +44,6 @@ const logger = createLogger(winstonOptions)
 
 const poolConfig: any = {
   connectionString: DATABASE_URL,
-}
-if (process.env.NODE_ENV === "production") {
-  poolConfig.ssl = {
-    rejectUnauthorized: false,
-  }
 }
 const pool = new pg.Pool(poolConfig)
 const db = {
@@ -109,7 +105,7 @@ app.post("/api/add-contact", async (req: Request, res: Response) => {
 })
 
 // Frontend (in production)
-if (process.env.NODE_ENV === "production") {
+if (NODE_ENV === "production") {
   app.use(express.static("dist/app"))
   app.get("*", function (req, res) {
     const filePath = path.join(
