@@ -16,7 +16,7 @@ Here is my PREPT (Parcel/React/Express/PostgreSQL/Typescript) stack example appl
 
 ### Parcel
 
-Homepage: [https://parceljs.org](Parcel)
+Homepage: [https://parceljs.org](https://parceljs.org)
 
 I haven't been using Parcel for long but prefer it over Webpack. The documentation is great and things work well out-of-the-box. Parcel has a built-in proxy to use with an Express back-end during development, support for SASS, Images etc.
 
@@ -24,7 +24,7 @@ I find that Webpack can be a major pain to configure. Create-React-App improves 
 
 **_Caveat_**: Because the output is ES5 and modules are not CommonJS, you can't use the JS version of the proxy config, which means you can't use the PORT environment variable for the proxy (so there is duplication in `.proxyrc.json`) See the issue here:
 
-https://github.com/parcel-bundler/parcel/issues/7330
+[https://github.com/parcel-bundler/parcel/issues/7330](https://github.com/parcel-bundler/parcel/issues/7330)
 
 ### React
 
@@ -72,7 +72,7 @@ I take the approach that no environment vars should have defaults to be defensiv
 ## Running in dev mode
 
 ```
-npm run dev
+$ npm run dev
 ```
 
 Will run 3 processes:
