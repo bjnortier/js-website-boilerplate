@@ -74,6 +74,7 @@ app.get("/api/people", async (req: Request, res: Response) => {
     )
     res.json(result.rows)
   } catch (e) {
+    logger.error(e)
     res.status(500).json("something went wrong :/")
   }
 })
@@ -98,6 +99,7 @@ app.post("/api/add-contact", async (req: Request, res: Response) => {
       )
       res.status(200).json("ok")
     } catch (e) {
+      logger.error(e)
       res.status(500).json("something went wrong :/")
     }
   }
