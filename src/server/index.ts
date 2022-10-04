@@ -43,6 +43,11 @@ const logger = createLogger(winstonOptions)
 const poolConfig: any = {
   connectionString: DATABASE_URL,
 }
+if (process.env.NODE_ENV === "production") {
+  poolConfig.ssl = {
+    rejectUnauthorized: false,
+  }
+}
 const pool = new pg.Pool(poolConfig)
 const db = {
   query: (text: string, params = []) => pool.query(text, params),
