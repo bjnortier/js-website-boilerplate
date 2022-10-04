@@ -91,6 +91,6 @@ This app is deployed on Heroku and deploys as-is with `git push heroku main`. Yo
 
 The app is deployed on Heroku at the moment (Oct 2022):
 
-1. Web app: [https://typescript-website-boilerplate.herokuapp.com](https://typescript-website-boilerplate.herokuapp.com)
-1. API: [https://typescript-website-boilerplate.herokuapp.com/api/people](https://typescript-website-boilerplate.herokuapp.com/api/people)
-1. Working React-router link: [https://typescript-website-boilerplate.herokuapp.com/foo](https://typescript-website-boilerplate.herokuapp.com/foo)
+1. Web app: [https://prept-stack.herokuapp.com](https://prept-stack.herokuapp.com)
+1. API: [https://prept-stack.herokuapp.com/api/people](https://prept-stack.herokuapp.com/api/people)
+1. Working React-router link: [https://prept-stack.herokuapp.com/foo](https://prept-stack.herokuapp.com/foo)

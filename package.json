@@ -1,6 +1,6 @@
 {
-  "name": "ts-website-boilerplate",
-  "version": "1.0.0",
+  "name": "prept-stack",
+  "version": "1.0.1",
   "description": "Boilerplate code for setting up a Typescript website (front-end and backend). Main technologies:",
   "source": "src/app/index.html",
   "type": "module",
@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bjnortier/typescript-website-boilerplate.git"
+    "url": "git+https://github.com/bjnortier/prept-stack.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/bjnortier/typescript-website-boilerplate/issues"
+    "url": "https://github.com/bjnortier/prept-stack/issues"
   },
-  "homepage": "https://github.com/bjnortier/typescript-website-boilerplate#readme",
+  "homepage": "https://github.com/bjnortier/prept-stack#readme",
   "dependencies": {
     "express": "^4.18.1",
     "express-promise-router": "^4.1.1",
