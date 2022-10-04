@@ -17,7 +17,8 @@ import pg from "pg"
 })
 const PORT: string = process.env.PORT!
 const LOG_LEVEL: string = process.env.LOG_LEVEL!
-const DATABASE_URL = process.env["DATABASE_URL"]
+const DATABASE_URL: string = process.env.DATABASE_URL!
+console.log(DATABASE_URL)
 
 /**
  * Logging
