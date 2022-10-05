@@ -19,6 +19,7 @@ const PORT: string = process.env.PORT!
 const LOG_LEVEL: string = process.env.LOG_LEVEL!
 const DATABASE_URL: string = process.env.DATABASE_URL!
 const NODE_ENV: string = process.env.NODE_ENV!
+const CA_CERT: string | undefined = process.env.CA_CERT
 
 /**
  * Logging
@@ -43,6 +44,12 @@ const logger = createLogger(winstonOptions)
 
 const poolConfig: any = {
   connectionString: DATABASE_URL,
+}
+if (NODE_ENV === "production") {
+  console.log("!!", CA_CERT)
+  poolConfig.ssl = {
+    ca: process.env.CA_CERT,
+  }
 }
 const pool = new pg.Pool(poolConfig)
 const db = {
