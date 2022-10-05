@@ -5,11 +5,21 @@ import { fileURLToPath } from "url"
 import pg from "pg"
 
 /**
- * Application configuration. Take the defensice approach to ensure all
+ * Application configuration. Take the defensive approach to ensure all
  * env vars are defined. This avoid costly errors when in production
  * and a var has not been defined.
  */
-;["PORT", "LOG_LEVEL", "DATABASE_URL", "NODE_ENV"].forEach((key) => {
+;[
+  "PORT",
+  "LOG_LEVEL",
+  "DATABASE_URL",
+  "NODE_ENV",
+  "PGHOST",
+  "PGUSER",
+  "PGDATABASE",
+  "PGPASSWORD",
+  "PGPORT",
+].forEach((key) => {
   if (process.env[key] === undefined) {
     console.error(`Environment variable ${key} is required`)
     process.exit(1)
@@ -17,9 +27,7 @@ import pg from "pg"
 })
 const PORT: string = process.env.PORT!
 const LOG_LEVEL: string = process.env.LOG_LEVEL!
-const DATABASE_URL: string = process.env.DATABASE_URL!
 const NODE_ENV: string = process.env.NODE_ENV!
-const CA_CERT: string | undefined = process.env.CA_CERT
 
 /**
  * Logging
@@ -42,11 +50,8 @@ const logger = createLogger(winstonOptions)
  * Database
  */
 
-const poolConfig: any = {
-  connectionString: DATABASE_URL,
-}
+const poolConfig: any = {}
 if (NODE_ENV === "production") {
-  console.log("!!", CA_CERT)
   poolConfig.ssl = {
     ca: process.env.CA_CERT,
   }
