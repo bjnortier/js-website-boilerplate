@@ -12,7 +12,6 @@ import pg from "pg"
 ;[
   "PORT",
   "LOG_LEVEL",
-  "DATABASE_URL",
   "NODE_ENV",
   "PGHOST",
   "PGUSER",
