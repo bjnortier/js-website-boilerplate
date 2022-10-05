@@ -48,7 +48,6 @@ const logger = createLogger(winstonOptions)
 /**
  * Database
  */
-
 const poolConfig: any = {}
 if (NODE_ENV === "production") {
   poolConfig.ssl = {
