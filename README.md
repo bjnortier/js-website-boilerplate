@@ -64,7 +64,12 @@ The app requires some environment variables:
 PORT=<Express port>
 PARCEL_PORT=<Parcel port during development>
 LOG_LEVEL=debug|info|warn|error
-DATABASE_URL=postgresql://...
+NODE_ENV=
+PGHOST=
+PGUSER=
+PGDATABASE=rept-stack
+PGPASSWORD=
+PGPORT=
 ```
 
 I take the approach that no environment vars should have defaults to be defensive - I have been caught out be undefined production environment variable too often and having them all explicitly in development reduces errors.
@@ -83,16 +88,32 @@ Will run 3 processes:
 
 ## Deployment on Heroku
 
-This app is deployed on Heroku and deploys as-is with `git push heroku main`. You only have to do 3 things:
+This app can be deployed on Heroku mostly as-is with `git push heroku main`. You only have to do 3 things:
 
 1. Add a PostgreSQL DB resource for your app (Heroku defines `DATABASE_URL` automatically).
 1. Create the required table in the Postgres Database (see above). You can access the Heroku DB using the command `heroku pg:psql`.
 1. Create a LOG_LEVEL environment variable.
+1. Modify the code to use the `DATABASE_URL` connection string:
 
-The app is deployed on Heroku at the moment (Oct 2022):
+```
+const poolConfig: any = {
+  connectionString: DATABASE_URL,
+}
+if (process.env.NODE_ENV === "production") {
+  poolConfig.ssl = {
+    rejectUnauthorized: false,
+  }
+}
+```
 
-![PREPT on Heroku](https://user-images.githubusercontent.com/57994/193849467-61fea1b3-f353-4bc1-ab72-8631375a58be.png)
+## Deployment on Digital Ocean
 
-1. Web app: [https://prept-stack.herokuapp.com](https://prept-stack.herokuapp.com)
-1. API: [https://prept-stack.herokuapp.com/api/people](https://prept-stack.herokuapp.com/api/people)
-1. Working React-router link: [https://prept-stack.herokuapp.com/foo](https://prept-stack.herokuapp.com/foo)
+The app is deployed on Digital Ocean at the moment (Oct 2022), with similar requirements to Heroku (see above):
+
+![PREPT Deployed](https://user-images.githubusercontent.com/57994/194041375-f376565a-c9ea-49b1-829f-fb991e622706.png)
+
+1. Web app: [https://https://urchin-app-7yzce.ondigitalocean.app](https://https://urchin-app-7yzce.ondigitalocean.app)
+1. API: [https://https://urchin-app-7yzce.ondigitalocean.app/api/people](https://https://urchin-app-7yzce.ondigitalocean.app/api/people)
+1. Working React-router link: [https://https://urchin-app-7yzce.ondigitalocean.app/foo](https://https://urchin-app-7yzce.ondigitalocean.app/foo)
+
+The DB connection was a bit tricky because the CA certificate doesn't work when you use a connection string, hence the use of separate `PG_*` environment variables.
